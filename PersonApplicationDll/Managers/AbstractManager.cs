@@ -8,7 +8,7 @@ using PersonApplicationDll.Entities;
 
 namespace PersonApplicationDll.Managers
 {
-    internal abstract class AbstractManager<T> : IManager<T>
+    internal abstract class AbstractManager<T> : IServiceGateway<T>
 
 {
     public T Create(T t)

@@ -14,9 +14,9 @@ namespace PersonWebApp.Controllers
 {
     public class PersonsController : Controller
     {
-        private IManager<Person> _pm = new DllFacade().GetPersonManager();
-        private IManager<Wish> _wm = new DllFacade().GetWishManager();
-        private IManager<PersonStatus> _psm = new DllFacade().GetPersonStatusManager();
+        private IServiceGateway<Person> _pm = new DllFacade().GetPersonManager();
+        private IServiceGateway<Wish> _wm = new DllFacade().GetWishManager();
+        private IServiceGateway<PersonStatus> _psm = new DllFacade().GetPersonStatusManager();
 
         // GET: Persons
         public ActionResult Index()

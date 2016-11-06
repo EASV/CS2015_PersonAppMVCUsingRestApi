@@ -8,7 +8,7 @@ using PersonApplicationDll.Entities;
 namespace PersonApplicationDll.Managers
 {
 
-    class PersonListManager : IManager<Person>
+    class PersonListManager : IServiceGateway<Person>
     {
         static PersonStatusListManager _psm = new PersonStatusListManager();
         private static int PersonId = 1;

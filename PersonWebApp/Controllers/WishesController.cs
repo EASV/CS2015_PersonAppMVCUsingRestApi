@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PersonApplicationDll;
 using PersonApplicationDll.Context;
 using PersonApplicationDll.Entities;
 
@@ -13,12 +14,11 @@ namespace PersonWebApp.Controllers
 {
     public class WishesController : Controller
     {
-        private PersonAppContext db = new PersonAppContext();
-
+        private IServiceGateway<Wish> wm = new DllFacade().GetWishManager();
         // GET: Wishes
         public ActionResult Index()
         {
-            return View(db.Wishes.ToList());
+            return View(wm.Read());
         }
 
         // GET: Wishes/Details/5
@@ -28,7 +28,7 @@ namespace PersonWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wish wish = db.Wishes.Find(id);
+            Wish wish = wm.Read(id.Value);
             if (wish == null)
             {
                 return HttpNotFound();
@@ -51,8 +51,7 @@ namespace PersonWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Wishes.Add(wish);
-                db.SaveChanges();
+                wm.Create(wish);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +65,7 @@ namespace PersonWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wish wish = db.Wishes.Find(id);
+            Wish wish = wm.Read(id.Value);
             if (wish == null)
             {
                 return HttpNotFound();
@@ -83,8 +82,7 @@ namespace PersonWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(wish).State = EntityState.Modified;
-                db.SaveChanges();
+                wm.Update(wish);
                 return RedirectToAction("Index");
             }
             return View(wish);
@@ -97,7 +95,7 @@ namespace PersonWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wish wish = db.Wishes.Find(id);
+            Wish wish = wm.Read(id.Value);
             if (wish == null)
             {
                 return HttpNotFound();
@@ -110,19 +108,9 @@ namespace PersonWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Wish wish = db.Wishes.Find(id);
-            db.Wishes.Remove(wish);
-            db.SaveChanges();
+            wm.Delete(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

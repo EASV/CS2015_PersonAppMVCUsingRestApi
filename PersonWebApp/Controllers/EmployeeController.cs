@@ -8,7 +8,7 @@ namespace PersonWebApp.Controllers
 {
     public class EmployeeController : Controller
     {
-        //private IManager<Employee> _em = new GenericDllFacade().GetEmployeeManager();
+        //private IServiceGateway<Employee> _em = new GenericDllFacade().GetEmployeeManager();
         //// GET: Employee
         //public ActionResult Index()
         //{

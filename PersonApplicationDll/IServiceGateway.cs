@@ -7,7 +7,7 @@ using PersonApplicationDll.Entities;
 
 namespace PersonApplicationDll
 {
-    public interface IManager<T>
+    public interface IServiceGateway<T>
     {
         //Create
         T Create(T t);

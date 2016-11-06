@@ -7,7 +7,7 @@ using PersonApplicationDll.Entities;
 
 namespace PersonApplicationDll.Managers
 {
-    class PersonStatusListManager : IManager<PersonStatus>
+    class PersonStatusListManager : IServiceGateway<PersonStatus>
     {
         private static readonly List<PersonStatus> Statuses =
             new List<PersonStatus>

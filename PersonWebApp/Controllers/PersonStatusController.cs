@@ -14,7 +14,7 @@ namespace PersonWebApp.Controllers
 {
     public class PersonStatusController : Controller
     {
-        private IManager<PersonStatus> _psm = new DllFacade().GetPersonStatusManager();
+        private IServiceGateway<PersonStatus> _psm = new DllFacade().GetPersonStatusManager();
 
 
         // GET: PersonStatus

@@ -10,19 +10,20 @@ namespace PersonApplicationDll
 {
     public class DllFacade
     {
-        public IManager<Person> GetPersonManager()
+        public IServiceGateway<Person> GetPersonManager()
         {
             return new PersonManager();
         }
 
-        public IManager<PersonStatus> GetPersonStatusManager()
+        public IServiceGateway<PersonStatus> GetPersonStatusManager()
         {
            return new PersonStatusManager();
         }
 
-        public IManager<Wish> GetWishManager()
+        public IServiceGateway<Wish> GetWishManager()
         {
-            return new WishManager();
+            //return new WishManager();
+            return new WishServiceGateway();
         }
     }
 }

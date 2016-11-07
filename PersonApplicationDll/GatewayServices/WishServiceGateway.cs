@@ -76,22 +76,21 @@ namespace PersonApplicationDll.Managers
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        /*
-         *  using (var client = new HttpClient())
+            using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:1922/");
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/wishes").Result;
+                var response = client.DeleteAsync($"/api/wishes/{id}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return response.Content.ReadAsAsync<List<Wish>>().Result;
+                    return response.Content.ReadAsAsync<Wish>().Result != null;
                 }
+                return false;
             }
-            return new List<Wish>();*/
+        }
+        
     }
 }
